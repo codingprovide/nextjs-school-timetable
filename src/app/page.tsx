@@ -21,6 +21,9 @@ export default function Home() {
     start: startOfWeek(currentDate),
     end: endOfWeek(currentDate),
   });
+  const handleChangeDate = (date: Date) => {
+    setCurrentDate(date);
+  };
 
   return (
     <Container maxWidth={"lg"} className=" p-0">
@@ -33,7 +36,11 @@ export default function Home() {
             currentYear={currentYear}
           />
         </DateWeekLayout>
-        <WeekList dayOfweeks={dayOfweeks} currentDate={currentDate} />
+        <WeekList
+          dayOfweeks={dayOfweeks}
+          currentDate={currentDate}
+          handleChangeDate={handleChangeDate}
+        />
       </Box>
     </Container>
   );

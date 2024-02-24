@@ -5,9 +5,11 @@ import { zhTW } from "date-fns/locale/zh-TW";
 export default function WeekList({
   dayOfweeks,
   currentDate,
+  handleChangeDate,
 }: {
   dayOfweeks: Date[];
   currentDate: Date;
+  handleChangeDate: (date: Date) => void;
 }) {
   return (
     <Box className=" bg-white w-full  rounded-t-[40px] pt-3">
@@ -29,6 +31,7 @@ export default function WeekList({
             }
             className={clsx(" rounded-xl min-w-0")}
             size="small"
+            onClick={() => handleChangeDate(date)}
           >
             <Stack>
               <Typography variant="button">
