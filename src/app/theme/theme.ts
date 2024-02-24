@@ -8,6 +8,8 @@ const roboto = Roboto({
   display: "swap",
 });
 
+const rootElement = () => document.getElementById("__next");
+
 const theme = createTheme({
   palette: {
     mode: "light",
@@ -23,6 +25,26 @@ const theme = createTheme({
             backgroundColor: "#60a5fa",
           }),
         }),
+      },
+    },
+    MuiPopover: {
+      defaultProps: {
+        container: rootElement,
+      },
+    },
+    MuiPopper: {
+      defaultProps: {
+        container: rootElement,
+      },
+    },
+    MuiDialog: {
+      defaultProps: {
+        container: rootElement,
+      },
+    },
+    MuiModal: {
+      defaultProps: {
+        container: rootElement,
       },
     },
   },
