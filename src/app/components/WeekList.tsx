@@ -10,12 +10,12 @@ export default function WeekList({
   currentDate: Date;
 }) {
   return (
-    <Box className=" bg-white w-full  rounded-t-[40px]  pt-10">
+    <Box className=" bg-white w-full  rounded-t-[40px] pt-3">
       <Stack
         direction={"row"}
         justifyContent={"space-around"}
         alignItems={"center"}
-        m={2}
+        m={1}
         spacing={1}
       >
         {dayOfweeks.map((date: Date, index: number) => (
@@ -27,7 +27,7 @@ export default function WeekList({
                 ? "secondary"
                 : "primary"
             }
-            className={clsx(" rounded-xl  min-w-0 py-0 px-4")}
+            className={clsx(" rounded-xl min-w-0")}
             size="small"
           >
             <Stack>
@@ -38,11 +38,11 @@ export default function WeekList({
                 variant="button"
                 fontSize={
                   date.toLocaleDateString() === currentDate.toLocaleDateString()
-                    ? "40px"
-                    : "30px"
+                    ? "30px"
+                    : "20px"
                 }
               >
-                {format(date, "d")}
+                {format(date, "dd")}
               </Typography>
             </Stack>
           </Button>
