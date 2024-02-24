@@ -15,8 +15,8 @@ export default function WeekList({
         direction={"row"}
         justifyContent={"space-around"}
         alignItems={"center"}
-        spacing={1}
         m={2}
+        spacing={1}
       >
         {dayOfweeks.map((date: Date, index: number) => (
           <Button
@@ -27,11 +27,7 @@ export default function WeekList({
                 ? "secondary"
                 : "primary"
             }
-            className={clsx(
-              date.toLocaleDateString() === currentDate.toLocaleDateString()
-                ? "rounded-xl p-0 min-w-0 px-1 h-[90px] w-[55px] shadow-2xl"
-                : " rounded-xl p-0 min-w-0 px-1"
-            )}
+            className={clsx(" rounded-xl  min-w-0 py-0 px-4")}
             size="small"
           >
             <Stack>
