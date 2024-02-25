@@ -41,6 +41,7 @@ export default function Home() {
           currentDate={currentDate}
           handleChangeDate={handleChangeDate}
         />
+        <Box className=" bg-white"></Box>
       </Box>
     </Container>
   );

@@ -23,12 +23,12 @@ export default function WeekList({
         {dayOfweeks.map((date: Date, index: number) => (
           <Button
             key={index}
-            variant="contained"
-            color={
+            variant={
               date.toLocaleDateString() === currentDate.toLocaleDateString()
-                ? "secondary"
-                : "primary"
+                ? "contained"
+                : "outlined"
             }
+            color={"primary"}
             className={clsx(" rounded-xl min-w-0")}
             size="small"
             onClick={() => handleChangeDate(date)}
