@@ -1,5 +1,5 @@
 "use client";
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import { Box, Container, Stack, Typography } from "@mui/material";
 import DateWeekLayout from "./components/DateWeekLayout";
 import TodayDisplay from "./components/TodayDisplay";
 import {
@@ -11,11 +11,11 @@ import {
   addDays,
 } from "date-fns";
 import { zhTW } from "date-fns/locale/zh-TW";
-import { FormEvent, use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import WeekList from "./components/WeekList";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import SwipeableViews from "react-swipeable-views";
 import { initialCourseData, classScheduleList } from "./data/courseDataList";
+import CourseRender from "./components/CourseRender";
+import ScheduleBlock from "./components/ScheduleBlock";
 export default function Home() {
   const [currentDate, setCurrentDate] = useState(new Date());
   interface CourseData {
@@ -27,9 +27,15 @@ export default function Home() {
   }
   const [courseDate, setCourseDate] = useState<CourseData>(initialCourseData);
   const [courseRenderIndex, setCourseRenderIndex] = useState(1);
-  const handleChangeIndex = (index: any) => {
-    console.log("Changed to index:", index);
+  const handleChangeIndex = (index: number) => {
+    setCourseRenderIndex(index);
     console.log("courseRenderIndex", courseRenderIndex);
+    console.log("index", index);
+    if (index > 1) {
+      setCurrentDate((preDate) => addDays(preDate, 1));
+    } else if (index < 1) {
+      setCurrentDate((preDate) => subDays(preDate, 1));
+    }
   };
 
   const [yesterday, setYesterday] = useState(subDays(currentDate, 1));
@@ -117,70 +123,12 @@ export default function Home() {
         />
         <Box className=" bg-white w-full">
           <Stack direction={"row"}>
-            <Grid2
-              container
-              spacing={4}
-              gap={2}
-              className=" w-1/4 border-0 border-r-2 border-solid border-slate-200 m-0"
-            >
-              {classScheduleList.map((data) => (
-                <Grid2
-                  xs={12}
-                  key={data.classPeriodNumber}
-                  p={0}
-                  className=" flex justify-center items-center flex-col"
-                >
-                  <Typography
-                    variant="body1"
-                    fontSize={12}
-                    gutterBottom
-                    textAlign={"center"}
-                  >
-                    {data.classTime}
-                  </Typography>
-                  <Typography variant="body1" textAlign={"center"}>
-                    {data.classPeriod}
-                  </Typography>
-                </Grid2>
-              ))}
-            </Grid2>
-            <SwipeableViews
-              className=" w-3/4"
-              enableMouseEvents
-              index={courseRenderIndex}
-              onChangeIndex={handleChangeIndex}
-            >
-              {courseRender.map((course, courseIndex) => (
-                <Grid2
-                  container
-                  spacing={4}
-                  gap={2}
-                  className="w-full m-0 px-2"
-                  key={courseIndex}
-                >
-                  {course.map((data, index) => (
-                    <Grid2
-                      key={index}
-                      xs={12}
-                      className="border-red-300 border-l-8 rounded-lg border-solid border-0 bg-red-50"
-                    >
-                      <Stack direction="column">
-                        <Stack
-                          direction="row"
-                          justifyContent="center"
-                          alignItems="center"
-                        >
-                          {data.course}
-                        </Stack>
-                        <Typography variant="body1">
-                          {data.classroom}
-                        </Typography>
-                      </Stack>
-                    </Grid2>
-                  ))}
-                </Grid2>
-              ))}
-            </SwipeableViews>
+            <ScheduleBlock classScheduleList={classScheduleList} />
+            <CourseRender
+              courseRender={courseRender}
+              courseRenderIndex={courseRenderIndex}
+              handleChangeIndex={handleChangeIndex}
+            />
           </Stack>
         </Box>
       </Box>
