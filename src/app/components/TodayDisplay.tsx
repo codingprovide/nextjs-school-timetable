@@ -16,17 +16,17 @@ export default function TodayDisplay({
     <>
       <Stack direction={"row"} spacing={2}>
         <Stack
+          className=" text-2xl"
           justifyContent={"center"}
           alignItems={"center"}
-          fontSize={"48px"}
         >
           {currentToday}
         </Stack>
         <Stack
           justifyContent={"center"}
           alignItems={"start"}
-          fontSize={"12px"}
           direction={"column"}
+          className=" text-xs"
         >
           <Box>{currentWeek}</Box>
           <Stack spacing={1} direction={"row"}>

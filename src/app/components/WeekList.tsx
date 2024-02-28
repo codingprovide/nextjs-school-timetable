@@ -12,12 +12,11 @@ export default function WeekList({
   handleChangeDate: (date: Date) => void;
 }) {
   return (
-    <Box className=" bg-white w-full  rounded-t-[40px] pt-3">
+    <Box className=" bg-white w-full  rounded-t-[40px] px-4 pt-2">
       <Stack
         direction={"row"}
         justifyContent={"space-around"}
         alignItems={"center"}
-        m={1}
         spacing={1}
       >
         {dayOfweeks.map((date: Date, index: number) => (
@@ -38,12 +37,12 @@ export default function WeekList({
                 {format(date, "eeeee", { locale: zhTW })}
               </Typography>
               <Typography
-                variant="button"
-                fontSize={
+                className={clsx(
                   date.toLocaleDateString() === currentDate.toLocaleDateString()
-                    ? "30px"
-                    : "20px"
-                }
+                    ? " text-lg"
+                    : " text-xs"
+                )}
+                variant="button"
               >
                 {format(date, "dd")}
               </Typography>

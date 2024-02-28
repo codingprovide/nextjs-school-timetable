@@ -10,7 +10,7 @@ export default function DateWeekLayout({
       justifyContent={"space-between"}
       alignItems={"center"}
       direction={"row"}
-      className=" mx-4 mb-3 "
+      className=" px-4 py-2 "
     >
       {children}
     </Stack>

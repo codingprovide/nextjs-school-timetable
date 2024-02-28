@@ -85,7 +85,7 @@ export default function Home() {
           currentDate={currentDate}
           handleChangeDate={handleChangeDate}
         />
-        <Box className=" bg-white w-full">
+        <Box className=" bg-white w-full pt-3">
           <Stack direction={"row"}>
             <ScheduleBlock classScheduleList={classScheduleList} />
             <CourseRender
