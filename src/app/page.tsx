@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Container, Stack } from "@mui/material";
 import DateWeekLayout from "./components/DateWeekLayout";
 import TodayDisplay from "./components/TodayDisplay";
 import {
@@ -7,7 +8,6 @@ import {
   eachDayOfInterval,
   startOfWeek,
   endOfWeek,
-  subDays,
   addDays,
   getDay,
 } from "date-fns";
@@ -17,97 +17,53 @@ import WeekList from "./components/WeekList";
 import { initialCourseData, classScheduleList } from "./data/courseDataList";
 import CourseRender from "./components/CourseRender";
 import ScheduleBlock from "./components/ScheduleBlock";
+import { CourseData } from "./type/type";
+
+const useFormattedDate = (date: Date) => {
+  return {
+    day: format(date, "d"),
+    month: format(date, "MMMM", { locale: zhTW }),
+    year: format(date, "yyyy"),
+    week: format(date, "eeee", { locale: zhTW }),
+    shortOfWeek: format(date, "E"),
+  };
+};
+
 export default function Home() {
   const [currentDate, setCurrentDate] = useState(new Date());
-  interface CourseData {
-    [key: string]: {
-      course: string;
-      classroom: string;
-      classPeriodNumber: number;
-    }[];
-  }
+
   const [courseData, setcourseData] = useState<CourseData>(initialCourseData);
+
+  const [formattedDate, setFormattedDate] = useState(
+    useFormattedDate(currentDate)
+  );
 
   const [courseRenderIndex, setCourseRenderIndex] = useState(
     getDay(currentDate)
   );
 
-  //處理當滑動元件左右滑時的index
-  const handleChangeIndex = (index: number) => {
-    if (index > courseRenderIndex) {
-      setCurrentDate(addDays(currentDate, 1));
-    } else if (index < courseRenderIndex) {
-      setCurrentDate(subDays(currentDate, 1));
-    }
-  };
-
-  const [yesterday, setYesterday] = useState(subDays(currentDate, 1));
-  const [yesterdayOfweekShort, setYesterdayOfweekShort] = useState(
-    format(yesterday, "E")
-  );
-  const [tomorrow, setTomorrow] = useState(addDays(currentDate, 1));
-  const [tomorrowOfWeekShort, setTomorrowOfWeekShort] = useState(
-    format(tomorrow, "E")
-  );
-  const [currentDayOfWeekShort, setCurrentDayOfWeekShort] = useState(
-    format(currentDate, "E")
-  );
-
-  const [currentToday, setCurretToday] = useState(format(currentDate, "d"));
-  const [currentWeek, setCurrentWeek] = useState(
-    format(currentDate, "eeee", { locale: zhTW })
-  );
-  const [currentMonth, setCurrentMonth] = useState(
-    format(currentDate, "MMMM", { locale: zhTW })
-  );
-  const [currentYear, setCurrentYear] = useState(format(currentDate, "yyyy"));
   const [dayOfweeks, setDayOfWeeks] = useState(
     eachDayOfInterval({
       start: startOfWeek(currentDate),
       end: endOfWeek(currentDate),
     })
   );
+  //處理當滑動元件左右滑時的index
+  const handleChangeIndex = (index: number) => {
+    const direction = index > courseRenderIndex ? 1 : -1;
+    setCurrentDate(addDays(currentDate, direction));
+  };
 
-  /* 初始化課程render 內容 */
   const initialCourseRender = dayOfweeks.map((date) => {
     return courseData[format(date, "E")] || [];
   });
 
   const [courseRender, setCourseRender] = useState([...initialCourseRender]);
-  /**/
 
   useEffect(() => {
-    setCurretToday(format(currentDate, "d"));
-    setCurrentMonth(format(currentDate, "MMMM", { locale: zhTW }));
-    setCurrentYear(format(currentDate, "yyyy"));
-    setCurrentWeek(format(currentDate, "eeee", { locale: zhTW }));
-    const yesterdayDate = subDays(currentDate, 1);
-    const tomorrowDate = addDays(currentDate, 1);
-    const yesterdayOfweekShort = format(yesterdayDate, "E");
-    const tomorrowOfWeekShort = format(tomorrowDate, "E");
-    const currentDayOfWeekShort = format(currentDate, "E");
-    setYesterday(yesterdayDate);
-    setYesterdayOfweekShort(yesterdayOfweekShort);
-    setTomorrow(tomorrowDate);
-    setTomorrowOfWeekShort(tomorrowOfWeekShort);
-    setCurrentDayOfWeekShort(currentDayOfWeekShort);
     setCourseRenderIndex(getDay(currentDate));
-    setDayOfWeeks(
-      eachDayOfInterval({
-        start: startOfWeek(currentDate),
-        end: endOfWeek(currentDate),
-      })
-    );
-    // setCourseRender([
-    //   courseData[yesterdayOfweekShort],
-    //   courseData[currentDayOfWeekShort],
-    //   courseData[tomorrowOfWeekShort],
-    // ]);
-  }, [courseData, currentDate]);
-
-  useEffect(() => {
-    setCurrentDate(new Date());
-  }, []);
+    setFormattedDate(useFormattedDate(currentDate));
+  }, [currentDate]);
 
   const handleChangeDate = (date: Date) => {
     setCurrentDate(date);
@@ -118,10 +74,10 @@ export default function Home() {
       <Box className=" bg-slate-100 w-full h-screen ">
         <DateWeekLayout>
           <TodayDisplay
-            currentToday={currentToday}
-            currentMonth={currentMonth}
-            currentWeek={currentWeek}
-            currentYear={currentYear}
+            currentToday={formattedDate.day}
+            currentMonth={formattedDate.month}
+            currentWeek={formattedDate.week}
+            currentYear={formattedDate.year}
           />
         </DateWeekLayout>
         <WeekList
