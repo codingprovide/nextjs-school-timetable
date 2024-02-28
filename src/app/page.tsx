@@ -9,6 +9,7 @@ import {
   endOfWeek,
   subDays,
   addDays,
+  getDay,
 } from "date-fns";
 import { zhTW } from "date-fns/locale/zh-TW";
 import { useEffect, useState } from "react";
@@ -26,17 +27,19 @@ export default function Home() {
     }[];
   }
   const [courseData, setcourseData] = useState<CourseData>(initialCourseData);
-  const [courseRenderIndex, setCourseRenderIndex] = useState(1);
+
+  const [courseRenderIndex, setCourseRenderIndex] = useState(
+    getDay(currentDate)
+  );
+
+  //處理當滑動元件左右滑時的index
   const handleChangeIndex = (index: number) => {
-    // 當我用滑動元件往右滑時，日期增加一天，反之減少一天
     if (index > courseRenderIndex) {
-      setCurrentDate((currentDate) => addDays(currentDate, 1));
+      setCurrentDate(addDays(currentDate, 1));
     } else if (index < courseRenderIndex) {
-      setCurrentDate((currentDate) => subDays(currentDate, 1));
+      setCurrentDate(subDays(currentDate, 1));
     }
-    // setCourseRenderIndex(index);
   };
-  // 當我使用滑動元件改變課程內容時，改變課程內容的陣列順序
 
   const [yesterday, setYesterday] = useState(subDays(currentDate, 1));
   const [yesterdayOfweekShort, setYesterdayOfweekShort] = useState(
@@ -49,11 +52,6 @@ export default function Home() {
   const [currentDayOfWeekShort, setCurrentDayOfWeekShort] = useState(
     format(currentDate, "E")
   );
-  const [courseRender, setCourseRender] = useState([
-    courseData[yesterdayOfweekShort],
-    courseData[currentDayOfWeekShort],
-    courseData[tomorrowOfWeekShort],
-  ]);
 
   const [currentToday, setCurretToday] = useState(format(currentDate, "d"));
   const [currentWeek, setCurrentWeek] = useState(
@@ -70,9 +68,13 @@ export default function Home() {
     })
   );
 
-  dayOfweeks.map((date) => {
-    console.log(format(date, "E"));
+  /* 初始化課程render 內容 */
+  const initialCourseRender = dayOfweeks.map((date) => {
+    return courseData[format(date, "E")] || [];
   });
+
+  const [courseRender, setCourseRender] = useState([...initialCourseRender]);
+  /**/
 
   useEffect(() => {
     setCurretToday(format(currentDate, "d"));
@@ -89,18 +91,18 @@ export default function Home() {
     setTomorrow(tomorrowDate);
     setTomorrowOfWeekShort(tomorrowOfWeekShort);
     setCurrentDayOfWeekShort(currentDayOfWeekShort);
-    setCourseRenderIndex(1);
+    setCourseRenderIndex(getDay(currentDate));
     setDayOfWeeks(
       eachDayOfInterval({
         start: startOfWeek(currentDate),
         end: endOfWeek(currentDate),
       })
     );
-    setCourseRender([
-      courseData[yesterdayOfweekShort],
-      courseData[currentDayOfWeekShort],
-      courseData[tomorrowOfWeekShort],
-    ]);
+    // setCourseRender([
+    //   courseData[yesterdayOfweekShort],
+    //   courseData[currentDayOfWeekShort],
+    //   courseData[tomorrowOfWeekShort],
+    // ]);
   }, [courseData, currentDate]);
 
   useEffect(() => {
