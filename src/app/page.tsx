@@ -25,18 +25,18 @@ export default function Home() {
       classPeriodNumber: number;
     }[];
   }
-  const [courseDate, setCourseDate] = useState<CourseData>(initialCourseData);
+  const [courseData, setcourseData] = useState<CourseData>(initialCourseData);
   const [courseRenderIndex, setCourseRenderIndex] = useState(1);
   const handleChangeIndex = (index: number) => {
-    setCourseRenderIndex(index);
-    console.log("courseRenderIndex", courseRenderIndex);
-    console.log("index", index);
-    if (index > 1) {
-      setCurrentDate((preDate) => addDays(preDate, 1));
-    } else if (index < 1) {
-      setCurrentDate((preDate) => subDays(preDate, 1));
+    // 當我用滑動元件往右滑時，日期增加一天，反之減少一天
+    if (index > courseRenderIndex) {
+      setCurrentDate((currentDate) => addDays(currentDate, 1));
+    } else if (index < courseRenderIndex) {
+      setCurrentDate((currentDate) => subDays(currentDate, 1));
     }
+    // setCourseRenderIndex(index);
   };
+  // 當我使用滑動元件改變課程內容時，改變課程內容的陣列順序
 
   const [yesterday, setYesterday] = useState(subDays(currentDate, 1));
   const [yesterdayOfweekShort, setYesterdayOfweekShort] = useState(
@@ -50,10 +50,11 @@ export default function Home() {
     format(currentDate, "E")
   );
   const [courseRender, setCourseRender] = useState([
-    courseDate[yesterdayOfweekShort],
-    courseDate[currentDayOfWeekShort],
-    courseDate[tomorrowOfWeekShort],
+    courseData[yesterdayOfweekShort],
+    courseData[currentDayOfWeekShort],
+    courseData[tomorrowOfWeekShort],
   ]);
+
   const [currentToday, setCurretToday] = useState(format(currentDate, "d"));
   const [currentWeek, setCurrentWeek] = useState(
     format(currentDate, "eeee", { locale: zhTW })
@@ -68,6 +69,11 @@ export default function Home() {
       end: endOfWeek(currentDate),
     })
   );
+
+  dayOfweeks.map((date) => {
+    console.log(format(date, "E"));
+  });
+
   useEffect(() => {
     setCurretToday(format(currentDate, "d"));
     setCurrentMonth(format(currentDate, "MMMM", { locale: zhTW }));
@@ -91,11 +97,11 @@ export default function Home() {
       })
     );
     setCourseRender([
-      courseDate[yesterdayOfweekShort],
-      courseDate[currentDayOfWeekShort],
-      courseDate[tomorrowOfWeekShort],
+      courseData[yesterdayOfweekShort],
+      courseData[currentDayOfWeekShort],
+      courseData[tomorrowOfWeekShort],
     ]);
-  }, [courseDate, currentDate]);
+  }, [courseData, currentDate]);
 
   useEffect(() => {
     setCurrentDate(new Date());
