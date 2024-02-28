@@ -1,14 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import SwipeableViews from "react-swipeable-views";
-
-interface CourseRender {
-  course: string;
-  classroom: string;
-  classPeriodNumber: number;
-}
-
-type CourseRenderArray = CourseRender[][];
+import { CourseRenderArray, CourseRender } from "../type/type";
 
 export default function CourseRender({
   courseRender,
