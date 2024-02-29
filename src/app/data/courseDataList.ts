@@ -17,19 +17,19 @@ export const initialCourseData = {
   Tue: [
     {
       course: "程式設計與實習",
-      location: "工程管",
+      location: "工程館",
       classroom: "E418",
       classPeriodNumber: 10,
     },
     {
       course: "程式設計與實習",
-      location: "工程管",
+      location: "工程館",
       classroom: "E418",
       classPeriodNumber: 11,
     },
     {
       course: "程式設計與實習",
-      location: "工程管",
+      location: "工程館",
       classroom: "E418",
       classPeriodNumber: 12,
     },
@@ -69,19 +69,19 @@ export const initialCourseData = {
   Thu: [
     {
       course: "數位邏輯實務",
-      location: "工程管",
+      location: "工程館",
       classroom: "E445",
       classPeriodNumber: 10,
     },
     {
       course: "數位邏輯實務",
-      location: "工程管",
+      location: "工程館",
       classroom: "E445",
       classPeriodNumber: 11,
     },
     {
       course: "數位邏輯實務",
-      location: "工程管",
+      location: "工程館",
       classroom: "E445",
       classPeriodNumber: 12,
     },
@@ -101,19 +101,19 @@ export const initialCourseData = {
   Fri: [
     {
       course: "電子電路",
-      location: "工程管",
+      location: "工程館",
       classroom: "E715",
       classPeriodNumber: 10,
     },
     {
       course: "電子電路",
-      location: "工程管",
+      location: "工程館",
       classroom: "E715",
       classPeriodNumber: 11,
     },
     {
       course: "電子電路",
-      location: "工程管",
+      location: "工程館",
       classroom: "E715",
       classPeriodNumber: 12,
     },

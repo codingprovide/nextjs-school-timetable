@@ -19,7 +19,7 @@ export default function ScheduleBlock({
       container
       spacing={4}
       gap={2}
-      className=" w-1/4 border-0 border-r-2 border-solid border-slate-200 m-0"
+      className=" w-1/4 border-0 border-r-2 border-solid border-neutral-200 m-0"
     >
       {classScheduleList.map((data) => (
         <Grid2
