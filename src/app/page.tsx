@@ -70,32 +70,34 @@ export default function Home() {
   };
 
   return (
-    <Container maxWidth={"lg"} className=" p-0">
-      <Box className=" bg-slate-100 w-full h-screen ">
-        <DateWeekLayout>
-          <TodayDisplay
-            currentToday={formattedDate.day}
-            currentMonth={formattedDate.month}
-            currentWeek={formattedDate.week}
-            currentYear={formattedDate.year}
-          />
-        </DateWeekLayout>
-        <WeekList
-          dayOfweeks={dayOfweeks}
-          currentDate={currentDate}
-          handleChangeDate={handleChangeDate}
-        />
-        <Box className=" bg-white w-full pt-3">
-          <Stack direction={"row"}>
-            <ScheduleBlock classScheduleList={classScheduleList} />
-            <CourseRender
-              courseRender={courseRender}
-              courseRenderIndex={courseRenderIndex}
-              handleChangeIndex={handleChangeIndex}
+    <div className="bg-gradient-to-b from-gray-100 to-gray-300">
+      <Container maxWidth={"lg"} className=" p-0 ">
+        <Box className=" w-full h-screen ">
+          <DateWeekLayout>
+            <TodayDisplay
+              currentToday={formattedDate.day}
+              currentMonth={formattedDate.month}
+              currentWeek={formattedDate.week}
+              currentYear={formattedDate.year}
             />
-          </Stack>
+          </DateWeekLayout>
+          <WeekList
+            dayOfweeks={dayOfweeks}
+            currentDate={currentDate}
+            handleChangeDate={handleChangeDate}
+          />
+          <Box className=" bg-white w-full pt-3">
+            <Stack direction={"row"}>
+              <ScheduleBlock classScheduleList={classScheduleList} />
+              <CourseRender
+                courseRender={courseRender}
+                courseRenderIndex={courseRenderIndex}
+                handleChangeIndex={handleChangeIndex}
+              />
+            </Stack>
+          </Box>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </div>
   );
 }

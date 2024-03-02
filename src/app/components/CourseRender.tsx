@@ -35,7 +35,7 @@ export default function CourseRender({
             container
             spacing={4}
             gap={0.5}
-            className="w-full m-0 px-2"
+            className="w-full m-0 px-1"
             key={courseIndex}
           >
             {course.map((data, index) => (
