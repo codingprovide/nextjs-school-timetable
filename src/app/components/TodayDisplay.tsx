@@ -16,7 +16,7 @@ export default function TodayDisplay({
     <>
       <Stack direction={"row"} spacing={2}>
         <Stack
-          className=" text-2xl"
+          className=" text-4xl"
           justifyContent={"center"}
           alignItems={"center"}
         >

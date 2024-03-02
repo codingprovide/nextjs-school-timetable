@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" id="__next-html">
       <StyledEngineProvider injectFirst>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
