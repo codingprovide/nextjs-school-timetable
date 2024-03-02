@@ -70,10 +70,7 @@ export default function Home() {
   };
 
   return (
-    <Container
-      maxWidth={"lg"}
-      className=" p-0 bg-gradient-to-r from-gray-100 to-gray-200"
-    >
+    <Container maxWidth={"lg"} className=" p-0 bg-gray-100">
       <Box className=" w-full h-screen ">
         <DateWeekLayout>
           <TodayDisplay

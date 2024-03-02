@@ -1,4 +1,5 @@
-import { Divider, Stack, Typography } from "@mui/material";
+"use client";
+import { Stack, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import SwipeableViews from "react-swipeable-views";
 import { CourseRenderArray, CourseRender } from "../type/type";
@@ -15,7 +16,7 @@ export default function CourseRender({
 }) {
   return (
     // 背景
-    <Grid2 container spacing={5} gap={0.5} className="w-full m-0 relative">
+    <Grid2 container spacing={4} gap={0} className="w-3/4 m-0 relative">
       {Array.from({ length: 10 }).map((_, index) => (
         <Grid2
           key={index}
@@ -25,7 +26,7 @@ export default function CourseRender({
       ))}
       {/* 課程內容 */}
       <SwipeableViews
-        className=" w-full absolute top-0 z-30"
+        className=" w-full absolute top-0"
         enableMouseEvents
         index={courseRenderIndex}
         onChangeIndex={handleChangeIndex}
@@ -35,20 +36,20 @@ export default function CourseRender({
             container
             spacing={4}
             gap={0.5}
-            className="w-full m-0 px-1"
+            className=" w-full m-0 px-1"
             key={courseIndex}
           >
             {course.map((data, index) => (
               <Grid2
                 key={index}
                 xs={12}
-                className=" border-red-300 border-l-8 rounded-lg border-solid border-0 bg-red-50"
+                className=" p-1 border-red-300 border-l-8 rounded-lg border-solid border-0 bg-red-50"
               >
                 <Stack direction="column" spacing={1}>
                   <Stack
-                    className=" select-none"
+                    className=" select-none px-2"
                     direction="row"
-                    justifyContent="center"
+                    justifyContent="start"
                     alignItems="center"
                   >
                     {data.course}
