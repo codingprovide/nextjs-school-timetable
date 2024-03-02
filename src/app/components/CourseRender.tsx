@@ -15,7 +15,7 @@ export default function CourseRender({
 }) {
   return (
     // 背景
-    <Grid2 container spacing={5} gap={0.5} className="w-full m-0 relative px-1">
+    <Grid2 container spacing={5} gap={0.5} className="w-full m-0 relative">
       {Array.from({ length: 10 }).map((_, index) => (
         <Grid2
           key={index}
@@ -35,7 +35,7 @@ export default function CourseRender({
             container
             spacing={4}
             gap={0.5}
-            className="w-full m-0"
+            className="w-full m-0 px-2"
             key={courseIndex}
           >
             {course.map((data, index) => (
