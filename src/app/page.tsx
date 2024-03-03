@@ -11,6 +11,8 @@ import {
   endOfWeek,
   addDays,
   getDay,
+  getWeek,
+  subDays,
 } from "date-fns";
 import { zhTW } from "date-fns/locale/zh-TW";
 import { useEffect, useState } from "react";
@@ -18,7 +20,12 @@ import WeekList from "./components/WeekList";
 import { initialCourseData, classScheduleList } from "./data/courseDataList";
 import CourseRender from "./components/CourseRender";
 import ScheduleBlock from "./components/ScheduleBlock";
-import { CourseColors, CourseData, CourseRenderArray } from "./type/type";
+import {
+  CourseColors,
+  CourseData,
+  CourseRenderArray,
+  CourseRenderData,
+} from "./type/type";
 
 const useFormattedDate = (date: Date) => {
   return {
@@ -36,7 +43,7 @@ const assignColorsToCourse = (
 ) => {
   let currentCourseValue: string | undefined;
   let colorsIndex = 0;
-  newCourseData.forEach((course: any[]) => {
+  newCourseData.forEach((course: CourseRenderData[]) => {
     course.forEach((courseData, index) => {
       if (index === 0) {
         currentCourseValue = courseData.course;
@@ -97,15 +104,36 @@ export default function Home() {
     return courseData[format(date, "E")] || [];
   });
 
-  const newCourseData = JSON.parse(JSON.stringify(initialCourseRender));
+  const handleEvenWeekCourse = (
+    courses: CourseRenderArray,
+    currentDate: Date
+  ) => {
+    const weekNumber = getWeek(currentDate);
+    const courseName = weekNumber % 2 === 0 ? "英文聽講" : "國文";
+    courses[1].forEach((course: CourseRenderData) => {
+      course.course = courseName;
+    });
+  };
+
+  const handleCourseData = (
+    currentDate: Date,
+    courseColors: CourseColors[]
+  ) => {
+    const newCourseData = JSON.parse(JSON.stringify(initialCourseRender));
+    handleEvenWeekCourse(newCourseData, currentDate);
+    assignColorsToCourse(newCourseData, courseColors);
+
+    return newCourseData;
+  };
 
   const [courseRender, setCourseRender] = useState(
-    assignColorsToCourse(newCourseData, courseColors)
+    handleCourseData(currentDate, courseColors)
   );
 
   useEffect(() => {
     setCourseRenderIndex(getDay(currentDate));
     setFormattedDate(useFormattedDate(currentDate));
+    setCourseRender(handleCourseData(currentDate, courseColors));
   }, [currentDate]);
 
   const handleChangeDate = (date: Date) => {

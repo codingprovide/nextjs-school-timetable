@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import SwipeableViews from "react-swipeable-views";
-import { CourseRenderArray, CourseRender } from "../type/type";
+import { CourseRenderArray, CourseRenderData } from "../type/type";
 import PlaceIcon from "@mui/icons-material/Place";
 import clsx from "clsx";
 

@@ -7,7 +7,7 @@ export interface CourseData {
   }[];
 }
 
-export interface CourseRender {
+export interface CourseRenderData {
   iconColor?: string | null | undefined;
   borderColor?: string | null | undefined;
   backgroundColor: string | null | undefined;
@@ -24,4 +24,4 @@ export interface CourseColors {
   iconColor: string;
 }
 
-export type CourseRenderArray = CourseRender[][];
+export type CourseRenderArray = CourseRenderData[][];
