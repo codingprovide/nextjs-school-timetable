@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { Box, Container, Stack } from "@mui/material";
@@ -17,7 +18,7 @@ import WeekList from "./components/WeekList";
 import { initialCourseData, classScheduleList } from "./data/courseDataList";
 import CourseRender from "./components/CourseRender";
 import ScheduleBlock from "./components/ScheduleBlock";
-import { CourseData } from "./type/type";
+import { CourseColors, CourseData, CourseRenderArray } from "./type/type";
 
 const useFormattedDate = (date: Date) => {
   return {
@@ -28,6 +29,44 @@ const useFormattedDate = (date: Date) => {
     shortOfWeek: format(date, "E"),
   };
 };
+
+const assignColorsToCourse = (
+  newCourseData: CourseRenderArray,
+  courseColors: CourseColors[]
+) => {
+  let currentCourseValue: string | undefined;
+  let colorsIndex = 0;
+  newCourseData.forEach((course: any[]) => {
+    course.forEach((courseData, index) => {
+      if (index === 0) {
+        currentCourseValue = courseData.course;
+        colorsIndex = 0;
+      }
+      if (currentCourseValue === courseData.course) {
+        Object.assign(courseData, courseColors[colorsIndex]);
+      } else {
+        currentCourseValue = courseData.course;
+        colorsIndex = (colorsIndex + 1) % courseColors.length;
+        Object.assign(courseData, courseColors[colorsIndex]);
+      }
+    });
+  });
+
+  return newCourseData;
+};
+
+const courseColors = [
+  {
+    borderColor: "border-blue-300",
+    backgroundColor: "bg-blue-50",
+    iconColor: "text-blue-300",
+  },
+  {
+    borderColor: "border-teal-300",
+    backgroundColor: "bg-teal-50",
+    iconColor: "text-teal-300",
+  },
+];
 
 export default function Home() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -58,7 +97,11 @@ export default function Home() {
     return courseData[format(date, "E")] || [];
   });
 
-  const [courseRender, setCourseRender] = useState([...initialCourseRender]);
+  const newCourseData = JSON.parse(JSON.stringify(initialCourseRender));
+
+  const [courseRender, setCourseRender] = useState(
+    assignColorsToCourse(newCourseData, courseColors)
+  );
 
   useEffect(() => {
     setCourseRenderIndex(getDay(currentDate));
