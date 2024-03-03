@@ -15,7 +15,7 @@ export default function CourseRender({
   handleChangeIndex: (index: number) => void;
 }) {
   return (
-    <Grid2 container spacing={4} gap={0} className="w-3/4 m-0 relative">
+    <Grid2 container spacing={4} gap={0.5} className="w-3/4 m-0 relative">
       {Array.from({ length: 10 }).map((_, index) => (
         <Grid2
           key={index}
@@ -42,7 +42,7 @@ export default function CourseRender({
                 key={data.classPeriodNumber}
                 xs={12}
                 className={clsx(
-                  ["p-1 border-l-8 rounded-lg border-solid border-0"],
+                  ["p-2 border-l-8 rounded-lg border-solid border-0"],
                   [data.backgroundColor],
                   [data.borderColor]
                 )}
@@ -67,13 +67,7 @@ export default function CourseRender({
                       alignItems="center"
                       className="text-sm"
                     >
-                      <PlaceIcon
-                        className={
-                          clsx(data.iconColor)
-                          // courseColorsRender[index] &&
-                          //   courseColorsRender[index].iconColor
-                        }
-                      />
+                      <PlaceIcon className={clsx(data.iconColor)} />
                       {data.location} - {data.classroom}
                     </Stack>
                   </Typography>

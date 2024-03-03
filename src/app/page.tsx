@@ -62,9 +62,9 @@ const courseColors = [
     iconColor: "text-blue-300",
   },
   {
-    borderColor: "border-teal-300",
-    backgroundColor: "bg-teal-50",
-    iconColor: "text-teal-300",
+    borderColor: "border-emerald-300",
+    backgroundColor: "bg-emerald-50",
+    iconColor: "text-emerald-300",
   },
 ];
 
