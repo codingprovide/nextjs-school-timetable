@@ -8,54 +8,49 @@ export default function ScheduleBlock({
   classScheduleList: ClassScheduleList[];
 }) {
   return (
-    <Grid2
-      container
-      spacing={4}
-      gap={2}
-      className=" w-2/6 border-0 border-r-2 border-solid border-neutral-200 m-0  px-0"
+    <Stack
+      className=" w-2/6 border-solid border-0 border-neutral-300 border-r"
+      direction={"row"}
+      justifyContent={"space-around"}
     >
-      {classScheduleList.map((data) => (
-        <Grid2 xs={12} key={data.classPeriodNumber} className=" p-0 mx-1 my-0">
-          <Stack
-            direction={"row"}
-            spacing={1}
-            justifyContent={"space-around"}
-            alignItems={"center"}
-            className=" h-full"
-          >
+      <Grid2
+        container
+        spacing={0}
+        gap={2}
+        className=" w-2/5 border-solid border-0 border-neutral-300 border-r"
+      >
+        {classScheduleList.map((data) => (
+          <Grid2 key={data.classPeriodNumber} xs={12}>
             <Typography
               variant="body1"
-              textAlign={"center"}
-              className=" text-xs"
+              color="initial"
+              className=" h-full text-center flex justify-center items-center text-base"
             >
-              {data.classPeriod}
+              {data.classPeriodNumber}
             </Typography>
+          </Grid2>
+        ))}
+      </Grid2>
+      <Grid2 container spacing={0} gap={2} className=" w-3/5">
+        {classScheduleList.map((data) => (
+          <Grid2 key={data.classPeriodNumber} xs={12}>
             <Stack
               direction={"column"}
               justifyContent={"center"}
               alignItems={"center"}
+              className=" h-full"
+              spacing={0.5}
             >
-              <Typography
-                variant="body1"
-                gutterBottom
-                textAlign={"center"}
-                className=" m-0 p-0 leading-none text-xs"
-              >
+              <Typography variant="body1" color="initial" className=" text-xs">
                 {data.classTimeStart}
               </Typography>
-              <span>|</span>
-              <Typography
-                variant="body1"
-                gutterBottom
-                textAlign={"center"}
-                className=" m-0 p-0 leading-none text-xs"
-              >
+              <Typography variant="body1" color="initial" className=" text-xs">
                 {data.classTimeEnd}
               </Typography>
             </Stack>
-          </Stack>
-        </Grid2>
-      ))}
-    </Grid2>
+          </Grid2>
+        ))}
+      </Grid2>
+    </Stack>
   );
 }
