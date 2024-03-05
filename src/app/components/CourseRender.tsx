@@ -15,7 +15,7 @@ export default function CourseRender({
   handleChangeIndex: (index: number) => void;
 }) {
   return (
-    <Grid2 container spacing={4} gap={0.5} className="w-3/4 m-0 relative">
+    <Grid2 container spacing={4} gap={0.5} className="w-4/6 m-0 relative">
       {Array.from({ length: 10 }).map((_, index) => (
         <Grid2
           key={index}

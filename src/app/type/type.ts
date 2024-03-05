@@ -25,3 +25,10 @@ export interface CourseColors {
 }
 
 export type CourseRenderArray = CourseRenderData[][];
+
+export interface ClassScheduleList {
+  classPeriod: string;
+  classTimeStart: string;
+  classTimeEnd: string;
+  classPeriodNumber: number;
+}

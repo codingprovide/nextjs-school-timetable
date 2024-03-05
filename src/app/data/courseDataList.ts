@@ -134,9 +134,34 @@ export const initialCourseData = {
 };
 
 export const classScheduleList = [
-  { classPeriod: "第10節", classTime: "18:10-18:55", classPeriodNumber: 10 },
-  { classPeriod: "第11節", classTime: "19:00-19:45", classPeriodNumber: 11 },
-  { classPeriod: "第12節", classTime: "19:50-20:35", classPeriodNumber: 12 },
-  { classPeriod: "第13節", classTime: "20:40-21:25", classPeriodNumber: 13 },
-  { classPeriod: "第14節", classTime: "21:30-22:15", classPeriodNumber: 14 },
+  {
+    classPeriod: "10",
+    classTimeStart: "18:10",
+    classTimeEnd: "18:55",
+    classPeriodNumber: 10,
+  },
+  {
+    classPeriod: "11",
+    classTimeStart: "19:00",
+    classTimeEnd: "19:45",
+    classPeriodNumber: 11,
+  },
+  {
+    classPeriod: "12",
+    classTimeStart: "19:50",
+    classTimeEnd: "20:35",
+    classPeriodNumber: 12,
+  },
+  {
+    classPeriod: "13",
+    classTimeStart: "20:40",
+    classTimeEnd: "21:25",
+    classPeriodNumber: 13,
+  },
+  {
+    classPeriod: "14",
+    classTimeStart: "21:30",
+    classTimeEnd: "22:15",
+    classPeriodNumber: 14,
+  },
 ];
