@@ -1,10 +1,11 @@
-import { Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import SwipeableViews from "react-swipeable-views";
 import { CourseRenderArray } from "../type/type";
 import PlaceIcon from "@mui/icons-material/Place";
 import clsx from "clsx";
-
+import { classScheduleList } from "../data/courseDataList";
+import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 export default function CourseRender({
   courseRender,
   courseRenderIndex,
@@ -15,7 +16,7 @@ export default function CourseRender({
   handleChangeIndex: (index: number) => void;
 }) {
   return (
-    <Grid2 container spacing={4} gap={0.5} className="w-4/6 m-0 relative">
+    <Grid2 container spacing={4} gap={0.5} className="w-5/6 m-0 relative">
       {Array.from({ length: 10 }).map((_, index) => (
         <Grid2
           key={index}
@@ -56,21 +57,38 @@ export default function CourseRender({
                   >
                     {data.course}
                   </Stack>
-                  <Typography
-                    variant="body1"
-                    className="select-none"
-                    component={"div"}
-                  >
-                    <Stack
-                      direction="row"
-                      justifyContent="start"
-                      alignItems="center"
-                      className="text-sm"
+                  <Stack direction={"row"} justifyContent={"space-between"}>
+                    <Typography
+                      variant="body1"
+                      className="select-none"
+                      component={"div"}
                     >
-                      <PlaceIcon className={clsx(data.iconColor)} />
-                      {data.location} - {data.classroom}
-                    </Stack>
-                  </Typography>
+                      <Stack
+                        direction="row"
+                        justifyContent="center"
+                        alignItems="center"
+                        className="text-xs"
+                      >
+                        <PlaceIcon className={clsx(data.iconColor)} />
+                        {data.location} - {data.classroom}
+                      </Stack>
+                    </Typography>
+                    <Typography variant="body1" component={"div"}>
+                      <Stack
+                        direction={"row"}
+                        justifyContent={"center"}
+                        alignItems={"center"}
+                        className="text-xs"
+                      >
+                        <QueryBuilderIcon className={clsx(data.iconColor)} />
+                        <Box>
+                          {classScheduleList[index].classTimeStart}
+                          {"-"}
+                          {classScheduleList[index].classTimeEnd}
+                        </Box>
+                      </Stack>
+                    </Typography>
+                  </Stack>
                 </Stack>
               </Grid2>
             ))}
