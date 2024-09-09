@@ -75,16 +75,16 @@ const courseColors = [
   },
 ];
 
-const handleEvenWeekCourse = (
-  courses: CourseRenderArray,
-  currentDate: Date
-) => {
-  const weekNumber = getWeek(currentDate);
-  const courseName = weekNumber % 2 === 0 ? "國文" : "英文聽講";
-  courses[1].forEach((course: CourseRenderData) => {
-    course.course = courseName;
-  });
-};
+// const handleEvenWeekCourse = (
+//   courses: CourseRenderArray,
+//   currentDate: Date
+// ) => {
+//   const weekNumber = getWeek(currentDate);
+//   const courseName = weekNumber % 2 === 0 ? "國文" : "英文聽講";
+//   courses[1].forEach((course: CourseRenderData) => {
+//     course.course = courseName;
+//   });
+// };
 
 export default function Home() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -120,7 +120,7 @@ export default function Home() {
     courseColors: CourseColors[]
   ) => {
     const newCourseData = JSON.parse(JSON.stringify(initialCourseRender));
-    handleEvenWeekCourse(newCourseData, currentDate);
+    // handleEvenWeekCourse(newCourseData, currentDate);
     assignColorsToCourse(newCourseData, courseColors);
 
     return newCourseData;
